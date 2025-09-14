@@ -14,12 +14,7 @@ RUN python3 -m venv /opt/venv \
  && /opt/venv/bin/pip install --no-cache-dir cfn-lint checkov
 ENV PATH="/opt/venv/bin:${PATH}"
 
-# cfn-guard（公式インストーラ経由で取得）
-# https://docs.aws.amazon.com/cfn-guard/latest/ug/setting-up-linux.html の推奨手順
+# cfn-guard（/usr/local/bin に直インストール）
 RUN set -eux; \
-    curl --proto '=https' --tlsv1.2 -sSf \
-      https://raw.githubusercontent.com/aws-cloudformation/cloudformation-guard/main/install-guard.sh \
-      | sh; \
-    mv /root/.guard/bin/cfn-guard /usr/local/bin/cfn-guard; \
-    chmod +x /usr/local/bin/cfn-guard; \
-    rm -rf /root/.guard
+  curl -sSfL https://raw.githubusercontent.com/aws-cloudformation/cloudformation-guard/main/install-guard.sh \
+  | sh -s -- -b /usr/local/bin
