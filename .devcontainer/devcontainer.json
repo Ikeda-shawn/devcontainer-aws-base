@@ -1,0 +1,6 @@
+{
+  "name": "cf-lint-only",
+  "image": "ghcr.io/ikeda-shawn/devcontainer-aws-base:0.1.0",
+  "remoteUser": "vscode",
+  "postCreateCommand": "cfn-lint --version && checkov --version && cfn-guard --version"
+}
